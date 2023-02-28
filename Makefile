@@ -11,12 +11,12 @@ all: index.html $(COMICS)
 # Make sure the HTML files are "standalone"
 index.html: index.md toc.md
 %.html: %.md
-	@echo "I don't know how to build <$@> from <$^>!" && false # delete this line when you're done
+	pandoc $< --standalone -o $@
 
 # TODO: Generate JPG files from PNG files
 # Make sure the generated images are at 50% quality!
 xkcd/%.jpg: xkcd/%.png
-	@echo "I don't know how to build <$@> from <$<>" && false # delete this line when you're done
+	convert $< -quality 50 $@
 
 # We use an external script to generate a table of contents
 toc.md: maketoc.sh $(POSTS)
